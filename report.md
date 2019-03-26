@@ -1,3 +1,4 @@
+## David
 
 1. Identify the entities that communicate with one another using this protocol.
    In most cases there are two entities with one acting as the client and the
@@ -17,15 +18,16 @@
    or wait? Do devices get told to slow down or speed up? How are control
    signals separated from data?
 
-4. Discuss the issues of security.  
+## Sean
+4. Discuss the issues of security.
    
    a. Does the protocol address the issue of
-   privacy? If so, how? If not, what risks might exist?  
+   privacy? If so, how? If not, what risks might exist?
    
    b. Does the protocol
    protect against malicious interlopers on the network? If so how? If not, how
    might the network be exploited or compromised by someone who could connect a
-   malicious device to the network?  
+   malicious device to the network?
    
    c. How does the protocol recover after a
    failure, i.e. after a power outage or some other breakdown?
