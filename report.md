@@ -36,6 +36,14 @@
    transmission rates? What does it do to control or adjust speeds? What if
    different devices have different speed capabilities?
 
+   Efficiency is a large concern for the PCIe protocol. One of the main reasons why you would want to use the PCIe protocol is for fast communication rates. The latest version of PCIe (version 5.0 at the time of writing this documentation) can obtain a maximum throughput of 63 GB/s using 16 lanes. One contributor that allows PCIe to achieve these fast transmission rates is each device has its own serial medium connecting to the root complex or host (in the scope of a general purpose computer the root complex or host would be the mother board). This typology varies drastically when compared to the PCI protocol which has all devices sharing one medium. This significantly limits the rate at which data could be transferred since only one devices could transmit data a time. Images depicting these difference in medium connection between the PCI and PCIe protocol are as follows.
+
+   ![Legacy Medium Configuration](./ImageAssets/PCILegacyMediumConnection.PNG)
+
+   ![Express Medium Configuration](./ImageAssets/PCIExpressMediumConnection.PNG)
+
+   Given the extremely fast transmission rates, the tolerance for timing of bit transmission is not negligible. In order to ensure that bits are sent and received at the same rate between two devices an addition 2 bits are appended at the end of 8 bits.
+
 6. How does the protocol address communication failures? What kinds of failures
    are addressed? Suggest two kinds of failures that are not addressed, and
    discuss what could happen to senders and receivers in a failure of that kind.
