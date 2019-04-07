@@ -6,12 +6,25 @@
    three kinds of entities with a third entity acting as a manager, facilitator,
    or go-between.
 
+Peripheral component interconnect express (PCIe) is a full duplex serial
+communication interface often used in communication between a CPU and some high
+speed peripheral. PCIe was originally designed in 2003 to replace the PCI (and
+variations) and AGP parallel buses that were in place but were starting to run
+up against bottlenecks preventing them from increasing bandwidth further. As a
+parallel bus increases its operating frequency, jitter and skew become
+significant problems to overcome.
+
+PCIe is very similar to a modern LAN for its point-to-point connection
+(like Ethernet) and the service it provides that is very similar to the
+transport, data link, and physical layers in the computer network OSI model.
+Where OSI has the transport layer, PCIe has the transaction layer. Where OSI
+
 2. Describe how devices identify themselves on the network, and become known to
    other devices on the network. If initial connection involves a handshake,
    describe the handshake. If identities are given, describe how the identities
    are assured to be unique.
 
-3. Discuss the issue of traffic and congestion., Describe how the network and
+3. Discuss the issue of traffic and congestion. Describe how the network and
    protocol addresses the problem of either too many devices trying to use the
    network at the same time or trying to push too much data through the network.
    Do devices take turns (how do they know?). Do devices tell get told to stop
