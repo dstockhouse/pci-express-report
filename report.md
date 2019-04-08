@@ -6,18 +6,35 @@
    three kinds of entities with a third entity acting as a manager, facilitator,
    or go-between.
 
-Peripheral component interconnect express (PCIe) is a full duplex serial
-communication interface often used in communication between a CPU and some high
-speed peripheral. PCIe was originally designed in 2003 to replace the PCI (and
-variations) and AGP parallel buses that were in place but were starting to run
-up against bottlenecks preventing them from increasing bandwidth further. As a
-parallel bus increases its operating frequency, jitter and skew become
-significant problems to overcome.
+   Peripheral component interconnect express (PCIe) is a full duplex serial
+   communication interface often used in communication between a CPU and some
+   high speed peripheral. The first revision of PCIe was designed in 2003 to
+   replace the existing parallel buses PCI (and its variations) and AGP that
+   were widely used but starting to run up against bottlenecks preventing
+   further increases in bandwidth. As a parallel bus increases its operating
+   frequency, jitter and skew become significant problems to overcome. The old
+   PCI, which was used as a general connection between a computer motherboard
+   and various peripherals, used a 32 or 64-bit parallel bus connection between
+   devices. Additionally, the PCI bus was a true bus, with almost all wire
+   connections shared by all devices using the bus. This meant that for a bus
+   connection involving many devices, the electrical connection might need to
+   travel a long distance and have high capacitance, which make increasing the
+   bus's speed past the MHz range difficult. The parallel bus also needed many
+   traces on the motherboard to route all required signals. AGP was another
+   parallel interface used for graphics cards, subject to most of the same
+   concerns as PCI.
 
-PCIe is very similar to a modern LAN for its point-to-point connection
-(like Ethernet) and the service it provides that is very similar to the
-transport, data link, and physical layers in the computer network OSI model.
-Where OSI has the transport layer, PCIe has the transaction layer. Where OSI
+   For these reasons, the PCI special interest group (PCI-SIG) left parallel
+   buses behind in favour of serial interfaces, which replace the problems
+   discussed above with other difficulties that are challenging but possible to
+   overcome. PCIe started to replace all uses of PCI and AGP in 2004, and it is
+   used almost exclusively as the connection to CPU peripherals on modern
+   motherboards.
+
+   PCIe is very similar to a modern LAN for its point-to-point connection (like
+   Ethernet) and the service it provides that is very similar to the transport,
+   data link, and physical layers in the computer network OSI model. Where OSI
+   has the transport layer, PCIe has the transaction layer.
 
 2. Describe how devices identify themselves on the network, and become known to
    other devices on the network. If initial connection involves a handshake,
@@ -32,11 +49,14 @@ Where OSI has the transport layer, PCIe has the transaction layer. Where OSI
    signals separated from data?
 
 ## Sean
-4. Discuss the issues of security. a. Does the protocol address the issue of
-   privacy? If so, how? If not, what risks might exist? b. Does the protocol
-   protect against malicious interlopers on the network? If so how? If not, how
-   might the network be exploited or compromised by someone who could connect a
-   malicious device to the network?
+4. Discuss the issues of security.
+
+a. Does the protocol address the issue of privacy? If so, how? If not, what
+   risks might exist?
+   
+b. Does the protocol protect against malicious interlopers on the network? If
+   so how? If not, how might the network be exploited or compromised by someone
+   who could connect a malicious device to the network?
 
    The PCIe protocol does not have features that directly address the issues of
    security. However, given the physical characteristics of the protocol,
@@ -46,8 +66,8 @@ Where OSI has the transport layer, PCIe has the transaction layer. Where OSI
    direct access to the PCIe slots that facilitate communication between two
    devices.
 
-   c. How does the protocol recover after a failure, i.e. after a power outage
-   or some other breakdown?
+c. How does the protocol recover after a failure, i.e. after a power outage or
+   some other breakdown?
 
 5. Is efficiency a concern? Does the protocol have features to optimize data
    transmission rates? What does it do to control or adjust speeds? What if
