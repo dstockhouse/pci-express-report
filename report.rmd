@@ -14,7 +14,7 @@ output: pdf_document
    Peripheral component interconnect express (PCIe) is a full duplex serial
    communication interface often used in communication between a CPU and some
    high speed peripheral. Devices often connected using PCIe include graphics
-   cards, high-speed Ethernet/Wi-Fi, and even some hard drives. The first
+   cards, high-speed Ethernet/Wi-Fi, and modern hard drives. The first
    revision of PCIe was designed in 2003 to replace the existing parallel buses
    PCI (and its variations) and AGP that were widely used but starting to run up
    against bottlenecks preventing further increases in bandwidth. As a parallel
@@ -80,7 +80,19 @@ output: pdf_document
    very high speed. Standard wire connections are subject to increased noise and
    power consumption when very high clock rates are involved, so to combat these
    negative effects PCIe uses differential pairs of electrical signals to
-   transmit information.
+   transmit information. At this layer, the bits are also encoded to ensure that
+   clock and synchronization information can be properly extracted from the
+   signal. Though PCIe uses a shared reference clock to ensure that devices
+   connected by a link are operating on the same frequency, the data transitions
+   are not synchronized to any edge transition of this clock. Instead, each
+   device has a PLL monitoring bit transitions on the data lines that
+   reconstructs the serial synchronization based on when bit transitions occur.
+   To ensure that enough bit transitions occur to extract necessary
+   synchronization, the PHY encodes each 8 bit word using 10 bits in an 8b/10b
+   format that enforces DC-balance and enough signal transitions to allow clock
+   recovery. This means that every PCIe transaction has only 80% efficiency of
+   bits sent, that is before version 3.0 which replaced the 8b/10b encoding with
+   a 128b/130b encoding with scrambling.
 
 2. Describe how devices identify themselves on the network, and become known to
    other devices on the network. If initial connection involves a handshake,
@@ -150,7 +162,14 @@ output: pdf_document
 
    A major part of PCIe is that a physical connector can be used with any PCIe
    device of any capability, including vastly different bandwidth and number of
-   lanes.
+   lanes. For a point-to-point full duplex architecture, there is no danger of a
+   collision between two devices attempting to transmit at the same time, as
+   only one device is capable of writing to each data line. When a switch is
+   used to make the architecture more bus-like, the switch is responsible for
+   regulating which virtual channels have access to which lanes at a time, and
+   multiplexes between different low-bandwidth devices trying to talk on the
+   same bus.
+
 
 ## Sean
 4. Discuss the issues of security.
@@ -219,11 +238,10 @@ c. How does the protocol recover after a failure, i.e. after a power outage or
    is specific to the PCIe protocol). The transaction layer has its own header
    and is as follows.
 
-   <!--![PCIe TLP header](ImageAssets/PCIE_TLP_memory_write.gif)-->
+   ![PCIe TLP header](./ImageAssets/PCIE_TLP_memory_write.png)
 
    The purpose of the Transaction Layer Packet (TLP) header is to interpret read
    and write instructions. Once the device has fulfilled the request of the read
    or write instruction, a new packet is sent back to the device that initiated
    the request. The PCIe protocol is unclear as to what steps are taken when
    more than one device share the same Requester ID.
-
