@@ -109,11 +109,14 @@
    with different traffic classes and virtual channels to differentiate between
    communication involving certain components but not others. This flow control
    information is persistent through the entire link for every message sent from
-   one device to another.
+   one device to another. Initialization is primarily performed by the physical
+   layer, which negotiates the number of lanes and data rate shared by
+   communicating devices.
 
-   The DL_Active state is the normal operating mode for the PCIe link. In this
-   state, TLPs and DLLPs can be transmitted over the physical layer as necessary
-   and the transaction layer link only goes down if the physical link goes down,
+   Once every initialization step is complete, the link enters the DL_Active
+   state, the normal operating mode for the PCIe link. In this state, TLPs and
+   DLLPs can be transmitted over the physical layer as necessary and the
+   transaction layer link only goes down if the physical link goes down,
    through device removal or failure.
 
 3. Discuss the issue of traffic and congestion. Describe how the network and
