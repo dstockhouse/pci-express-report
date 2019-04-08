@@ -172,36 +172,39 @@ c. How does the protocol recover after a failure, i.e. after a power outage or
    Efficiency is a large concern for the PCIe protocol. One of the main reasons
    why you would want to use the PCIe protocol is for fast communication rates.
    The latest version of PCIe (version 5.0 at the time of writing this
-   documentation) can obtain a maximum throughput of 63 GB/s using 16 lanes. One
+   documentation) can obtain a maximum throughput of 64 GB/s using 16 lanes. One
    contributor that allows PCIe to achieve these fast transmission rates is each
-   device has its own serial medium connecting to the root complex or host (in
-   the scope of a general purpose computer, the root complex or host would be
-   the mother board). This typology varies drastically when compared to the PCI
-   protocol which has all devices sharing one medium. This significantly limits
-   the rate at which data can be transferred since only one device can
-   transmit data a time. Images depicting these differences in medium connection
-   between the PCI and PCIe protocol are as follows.
+   device has its own serial medium connecting to the root complex or switch.
+   The purpose of the switch is to allow multiplex connections between the PCIe
+   peripherals on a single link with the root complex or a switch. This varies
+   drastically when compared to the PCI protocol which has all devices sharing
+   one medium. The PCI medium connections significantly limits the rate at which
+   data can be transferred since only one device can transmit data at a time.
+   Images depicting these differences in medium connection between the PCI and
+   PCIe protocol are as follows.
 
    ![Legacy Medium Configuration](./ImageAssets/PCILegacyMediumConnection.PNG)
 
    ![Express Medium Configuration](./ImageAssets/PCIExpressMediumConnection.PNG)
 
+   It is worthy to note the PCIe protocol can mock the bus configuration of PCI
+   using switches. This allows for software backwards compatibility between the
+   two protocols.
+
    In order to ensure that bits are sent and received at the same rate between
-   two devices an addition 2 bits are appended for each 8. These added bits
-   allow the phase locked loop (an additional peace of hardware) to measure the
+   two devices an addition 2 bits are inserted for each 8. These added bits
+   allow the phase locked loop (an additional piece of hardware) to measure the
    frequency at which signals are transmitted and synchronize devices.
 
 6. How does the protocol address communication failures? What kinds of failures
    are addressed? Suggest two kinds of failures that are not addressed, and
    discuss what could happen to senders and receivers in a failure of that kind.
 
-   The PCIe protocol accounts for transmission failures at two layers. The
-   physical layer, which was previously discussed by adding two bits to 8 bit
-   messages to ensure that both devices remain operating at the same
-   frequencies. The data link layer, which ensures that the stream of bits that
-   were sent, were the same as the ones received. This is achieved via Cyclic
-   Redundancy Checks (CRC). **In the case that the CRC identifies an error, a
-   request will be sent to the sending device to resend those packets.**
+   The PCIe protocol accounts for transmission failures by ensuring that the
+   stream of bits that were sent from a device, were the same as the ones
+   received. This is achieved via Cyclic Redundancy Checks (CRC). In the case
+   that the CRC identifies an error, a request will be sent to the sending
+   device to resend those packets.
 
    One unaccounted possibility for error is in the transaction layer (the
    transaction layer is one level of abstraction above the data link layer and
@@ -214,4 +217,4 @@ c. How does the protocol recover after a failure, i.e. after a power outage or
    and write instructions. Once the device has fulfilled the request of the read
    or write instruction, a new packet is sent back to the device that initiated
    the request. The PCIe protocol is unclear as to what steps are taken when
-   more than one device share the same Requestor ID.
+   more than one device share the same Requester ID.
