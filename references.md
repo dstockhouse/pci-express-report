@@ -14,5 +14,9 @@
 
 [PCI 3.0 Base Specification (2010)](http://www.lttconn.com/res/lttconn/pdres/201402/20140218105502619.pdf)
 
-[IEEE Paper on PCIe Switchin (2003)](https://ieeexplore-ieee-org.ezproxy.libproxy.db.erau.edu/stamp/stamp.jsp?tp=&arnumber=1231473&tag=1)
+[IEEE Paper on PCIe Switching (2003)](https://ieeexplore-ieee-org.ezproxy.libproxy.db.erau.edu/stamp/stamp.jsp?tp=&arnumber=1231473&tag=1)
+
+[CERN Presentation on PCIe basics](https://indico.cern.ch/event/121654/attachments/68430/98164/Practical_introduction_to_PCI_Express_with_FPGAs_-_Extended.pdf)
+
+[Mindshare partial textbook (2003, 2008)](https://www.mindshare.com/files/ebooks/pci%20express%20system%20architecture.pdf)
 
