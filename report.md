@@ -75,7 +75,19 @@
    very high speed. Standard wire connections are subject to increased noise and
    power consumption when very high clock rates are involved, so to combat these
    negative effects PCIe uses differential pairs of electrical signals to
-   transmit information.
+   transmit information. At this layer, the bits are also encoded to ensure that
+   clock and synchronization information can be properly extracted from the
+   signal. Though PCIe uses a shared reference clock to ensure that devices
+   connected by a link are operating on the same frequency, the data transitions
+   are not synchronized to any edge transition of this clock. Instead, each
+   device has a PLL monitoring bit transitions on the data lines that
+   reconstructs the serial synchronization based on when bit transitions occur.
+   To ensure that enough bit transitions occur to extract necessary
+   synchronization, the PHY encodes each 8 bit word using 10 bits in an 8b/10b
+   format that enforces DC-balance and enough signal transitions to allow clock
+   recovery. This means that every PCIe transaction has only 80% efficiency of
+   bits sent, that is before version 3.0 which replaced the 8b/10b encoding with
+   a 128b/130b encoding with scrambling.
 
 2. Describe how devices identify themselves on the network, and become known to
    other devices on the network. If initial connection involves a handshake,
@@ -145,7 +157,14 @@
 
    A major part of PCIe is that a physical connector can be used with any PCIe
    device of any capability, including vastly different bandwidth and number of
-   lanes.
+   lanes. For a point-to-point full duplex architecture, there is no danger of a
+   collision between two devices attempting to transmit at the same time, as
+   only one device is capable of writing to each data line. When a switch is
+   used to make the architecture more bus-like, the switch is responsible for
+   regulating which virtual channels have access to which lanes at a time, and
+   multiplexes between different low-bandwidth devices trying to talk on the
+   same bus.
+
 
 ## Sean
 4. Discuss the issues of security.

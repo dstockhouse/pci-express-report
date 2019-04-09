@@ -20,3 +20,5 @@
 
 [Mindshare partial textbook (2003, 2008)](https://www.mindshare.com/files/ebooks/pci%20express%20system%20architecture.pdf)
 
+[Xilinx white paper on PCIe performance (2014)](https://www.xilinx.com/support/documentation/white_papers/wp350.pdf)
+
