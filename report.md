@@ -9,7 +9,7 @@
    Peripheral component interconnect express (PCIe) is a full duplex serial
    communication interface often used in communication between a CPU and some
    high speed peripheral. Devices often connected using PCIe include graphics
-   cards, high-speed Ethernet/Wi-Fi, and even some hard drives. The first
+   cards, high-speed Ethernet/Wi-Fi, and modern hard drives. The first
    revision of PCIe was designed in 2003 to replace the existing parallel buses
    PCI (and its variations) and AGP that were widely used but starting to run up
    against bottlenecks preventing further increases in bandwidth. As a parallel
@@ -214,7 +214,7 @@ c. How does the protocol recover after a failure, i.e. after a power outage or
    is specific to the PCIe protocol). The transaction layer has its own header
    and is as follows.
 
-   ![PCIe TLP header](./ImageAssets/PCIE_TLP_memory_write.gif)
+   ![PCIe TLP header](./ImageAssets/PCIE_TLP_memory_write.png)
 
    The purpose of the Transaction Layer Packet (TLP) header is to interpret read
    and write instructions. Once the device has fulfilled the request of the read
