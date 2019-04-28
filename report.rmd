@@ -1,7 +1,15 @@
 ---
 #title: "CEC460 Final Project: PCI Express"
+#output: latex_document
 output: pdf_document
+#output: 
+#	pdf_document:
+#		fig_caption: yes
+#		includes:
+#			in_header: preamble-latex.tex
 geometry: margin=2cm
+header-includes:
+- \usepackage{float}
 ---
 
 # PCI Express
@@ -47,7 +55,12 @@ geometry: margin=2cm
    the need for a network layer that handles routing between links in a
    complicated network topology. The PCIe layers are shown in the figure below.
 
-   ![PCIe Layers](ImageAssets/PCIe_Layers.PNG)
+\begin{figure}[H]
+\centering
+\includegraphics{ImageAssets/PCIe_Layers.PNG}
+\caption{PCIe Layers}
+\end{figure}
+
 
    The uppermost layer of the PCIe stack is the transaction layer which fulfils
    a role like OSI's transport layer. The transaction layer handles information
@@ -102,7 +115,11 @@ geometry: margin=2cm
    further detail below. The transitions between states in the DLCMSM are shown
    in the diagram below.
 
-   ![Data link control and management state machine diagram](ImageAssets/PCIe_DLCMSM.PNG)
+\begin{figure}[H]
+\centering
+\includegraphics{ImageAssets/PCIe_DLCMSM.PNG}
+\caption{Data link control and management state machine diagram}
+\end{figure}
    
    In the DL_Inactive state, which is entered upon the device powering up, the link
    is non-operational or nothing is connected. The link can move to the DL_Init
@@ -179,14 +196,18 @@ geometry: margin=2cm
    is specific to the PCIe protocol). The transaction layer has its own header
    and is as follows.
 
-   ![PCIe TLP header](./ImageAssets/PCIE_TLP_memory_write.png)
+\begin{figure}[H]
+\centering
+\includegraphics{./ImageAssets/PCIE_TLP_memory_write.png}
+\caption{PCIe TLP header}
+\end{figure}
 
    The purpose of the Transaction Layer Packet (TLP) header is to interpret read
    and write instructions. Once the device has fulfilled the request of the read
    or write instruction, a new packet is sent back to the device that initiated
    the request. The PCIe protocol is unclear as to what steps are taken when
    more than one device share the same Requester ID. Malicious behavior may be
-   possible should an individual spoof a requestor ID.
+   possible should an individual spoof a requester ID.
 
 ## Efficiency
 
@@ -204,9 +225,17 @@ geometry: margin=2cm
    Images depicting these differences in medium connection between the PCI and
    PCIe protocol are as follows.
 
-   ![Legacy Medium Configuration](./ImageAssets/PCILegacyMediumConnection.PNG)
+\begin{figure}[H]
+\centering
+\includegraphics{./ImageAssets/PCILegacyMediumConnection.PNG}
+\caption{Legacy Medium Configuration}
+\end{figure}
 
-   ![Express Medium Configuration](./ImageAssets/PCIExpressMediumConnection.PNG)
+\begin{figure}[H]
+\centering
+\includegraphics{./ImageAssets/PCIExpressMediumConnection.PNG}
+\caption{Express Medium Configuration}
+\end{figure}
 
    It is worthy to note the PCIe protocol can mock the bus configuration of PCI
    using switches. This allows for software backwards compatibility between the
