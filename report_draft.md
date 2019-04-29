@@ -1,8 +1,10 @@
-## PCI Express
-## CEC460
-## Protocol Report
-## David Stockhouse
-## Sean Link
+## David
+
+1. Identify the entities that communicate with one another using this protocol.
+   In most cases there are two entities with one acting as the client and the
+   other as the server, or caller and callee. But in some protocols there may be
+   three kinds of entities with a third entity acting as a manager, facilitator,
+   or go-between.
 
    Peripheral component interconnect express (PCIe) is a full duplex serial
    communication interface often used in communication between a CPU and some
@@ -30,7 +32,7 @@
    used almost exclusively as the connection to CPU peripherals on modern
    motherboards.
 
-### Architecture
+### Layered Architecture
 
    PCIe implements an architecture of abstraction layers similar to the OSI
    network model. While the 5-layer OSI model has 4 supporting layers below the
@@ -87,6 +89,11 @@
    bits sent, that is before version 3.0 which replaced the 8b/10b encoding with
    a 128b/130b encoding with scrambling.
 
+2. Describe how devices identify themselves on the network, and become known to
+   other devices on the network. If initial connection involves a handshake,
+   describe the handshake. If identities are given, describe how the identities
+   are assured to be unique.
+
    The PCIe link is managed by the data link layer using a finite state machine
    called the data link control and management state machine (DLCMSM). The
    DLCMSM can be in one of three states: DL_Inactive, DL_Init, or DL_Active,
@@ -124,6 +131,13 @@
    transaction layer link only goes down if the physical link goes down,
    through device removal or failure.
 
+3. Discuss the issue of traffic and congestion. Describe how the network and
+   protocol addresses the problem of either too many devices trying to use the
+   network at the same time or trying to push too much data through the network.
+   Do devices take turns (how do they know?). Do devices tell get told to stop
+   or wait? Do devices get told to slow down or speed up? How are control
+   signals separated from data?
+
    PCIe is a point-to-point connection, so a single "bus" can only natively
    connect two devices. The PCIe topology includes at its base a root complex,
    the interface connecting PCIe links to the CPU through a parallel interface,
@@ -151,7 +165,16 @@
    multiplexes between different low-bandwidth devices trying to talk on the
    same bus.
 
-### Security
+
+## Sean
+4. Discuss the issues of security.
+
+a. Does the protocol address the issue of privacy? If so, how? If not, what
+   risks might exist?
+   
+b. Does the protocol protect against malicious interlopers on the network? If
+   so how? If not, how might the network be exploited or compromised by someone
+   who could connect a malicious device to the network?
 
    The PCIe protocol does not have features that directly address the issues of
    security. However, given the physical characteristics of the protocol,
@@ -160,6 +183,13 @@
    data being transmitted directly from PCIe communications, they would need
    direct access to the PCIe slots that facilitate communication between two
    devices.
+
+c. How does the protocol recover after a failure, i.e. after a power outage or
+   some other breakdown?
+
+5. Is efficiency a concern? Does the protocol have features to optimize data
+   transmission rates? What does it do to control or adjust speeds? What if
+   different devices have different speed capabilities?
 
    Efficiency is a large concern for the PCIe protocol. One of the main reasons
    why you would want to use the PCIe protocol is for fast communication rates.
@@ -187,6 +217,10 @@
    two devices an addition 2 bits are inserted for each 8. These added bits
    allow the phase locked loop (an additional piece of hardware) to measure the
    frequency at which signals are transmitted and synchronize devices.
+
+6. How does the protocol address communication failures? What kinds of failures
+   are addressed? Suggest two kinds of failures that are not addressed, and
+   discuss what could happen to senders and receivers in a failure of that kind.
 
    The PCIe protocol accounts for transmission failures by ensuring that the
    stream of bits that were sent from a device, were the same as the ones
