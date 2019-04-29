@@ -160,6 +160,28 @@
    direct access to the PCIe slots that facilitate communication between two
    devices.
 
+   The PCIe protocol accounts for transmission failures by ensuring that the
+   stream of bits that were sent from a device, were the same as the ones
+   received. This is achieved via Cyclic Redundancy Checks (CRC). In the case
+   that the CRC identifies an error, a request will be sent to the sending
+   device to resend those packets.
+
+   One unaccounted possibility for error is in the transaction layer (the
+   transaction layer is one level of abstraction above the data link layer and
+   is specific to the PCIe protocol). The transaction layer has its own header
+   and is as follows.
+
+   ![PCIe TLP header](./ImageAssets/PCIE_TLP_memory_write.png)
+
+   The purpose of the Transaction Layer Packet (TLP) header is to interpret read
+   and write instructions. Once the device has fulfilled the request of the read
+   or write instruction, a new packet is sent back to the device that initiated
+   the request. The PCIe protocol is unclear as to what steps are taken when
+   more than one device share the same Requester ID. Malicious behavior may be
+   possible should an individual spoof a requestor ID.
+
+### Efficiency
+
    Efficiency is a large concern for the PCIe protocol. One of the main reasons
    why you would want to use the PCIe protocol is for fast communication rates.
    The latest version of PCIe (version 5.0 at the time of writing this
@@ -186,22 +208,3 @@
    two devices an addition 2 bits are inserted for each 8. These added bits
    allow the phase locked loop (an additional piece of hardware) to measure the
    frequency at which signals are transmitted and synchronize devices.
-
-   The PCIe protocol accounts for transmission failures by ensuring that the
-   stream of bits that were sent from a device, were the same as the ones
-   received. This is achieved via Cyclic Redundancy Checks (CRC). In the case
-   that the CRC identifies an error, a request will be sent to the sending
-   device to resend those packets.
-
-   One unaccounted possibility for error is in the transaction layer (the
-   transaction layer is one level of abstraction above the data link layer and
-   is specific to the PCIe protocol). The transaction layer has its own header
-   and is as follows.
-
-   ![PCIe TLP header](./ImageAssets/PCIE_TLP_memory_write.png)
-
-   The purpose of the Transaction Layer Packet (TLP) header is to interpret read
-   and write instructions. Once the device has fulfilled the request of the read
-   or write instruction, a new packet is sent back to the device that initiated
-   the request. The PCIe protocol is unclear as to what steps are taken when
-   more than one device share the same Requester ID.
