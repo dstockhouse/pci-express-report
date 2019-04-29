@@ -1,6 +1,5 @@
 ## PCI Express
-## CEC460
-## Protocol Report
+## CEC460: Protocol Report
 ## David Stockhouse
 ## Sean Link
 
